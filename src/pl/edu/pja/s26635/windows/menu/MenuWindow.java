@@ -4,6 +4,7 @@ import pl.edu.pja.s26635.windows.game.GameWindow;
 import pl.edu.pja.s26635.windows.scores.HighScoresWindow;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -40,9 +41,13 @@ public class MenuWindow extends JFrame {
 
         JPanel jPanel = new JPanel();
 
+        jPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+
         jPanel.add(newGameButton);
         jPanel.add(scoresButton);
         jPanel.add(exitButton);
+
 
         add(jPanel);
 
