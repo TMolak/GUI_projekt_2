@@ -5,12 +5,15 @@ import java.awt.*;
 
 public class Dino extends JComponent {
 
-    private int startX = (int) CENTER_ALIGNMENT;
-    private int startY = (int) CENTER_ALIGNMENT;
+    private int startX;
+    private int startY;
     private int changeX = 5;
 
 
-    public Dino() {
+    public Dino(int startX, int startY) {
+        this.startX = startX;
+        this.startY = startY;
+
         Thread runningDino = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -30,13 +33,13 @@ public class Dino extends JComponent {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        startX += changeX;
+        this.startX += changeX;
 
         if (startX + 50 >= getWidth() || startX <= 0) {
             changeX = -changeX;
         }
         g.setColor(Color.GREEN);
-        g.fillOval(startX, startY, 50, 50);
+        g.fillOval(this.startX, this.startY, 50, 50);
 
     }
 

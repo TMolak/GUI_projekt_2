@@ -11,8 +11,11 @@ public class GameWindow extends JFrame {
     public void generateFrame(){
         JFrame frame = new JFrame("Dino Game");
 
-        frame.add(new Dino());
+
         frame.setSize(1000,800);
+
+        frame.add(new Dino((frame.getWidth()/2), (frame.getHeight()/2)));
+
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
