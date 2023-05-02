@@ -9,9 +9,12 @@ public class GameWindow extends JFrame {
     }
 
     public void generateFrame(){
-        setSize(1000,800);
-        setLocationRelativeTo(null);
-        setVisible(true);
+        JFrame frame = new JFrame("Dino Game");
+
+        frame.add(new Dino());
+        frame.setSize(1000,800);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
 
     }
 }
