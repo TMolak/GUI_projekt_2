@@ -26,43 +26,14 @@ public class Enemy extends JComponent {
 
         this.startX = random.nextInt(maxX - 1) + 1;
         this.startY = random.nextInt(maxY - 1) + 1;
-        Thread runningEnemy = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (true) {
-                    try {
-                        Thread.sleep(80);
-                    } catch (Exception e) {
-
-                    }
-                    repaint();
-                }
-            }
-        });
-        runningEnemy.start();
 
     }
 
-//    public void runningEnemy() {
-////        Thread runningEnemy = new Thread(new Runnable() {
-////            @Override
-////            public void run() {
-//        while (true) {
-//            try {
-//                wait(80);
-//            } catch (Exception e) {
-//
-//            }
-//            repaint();
-//        }
-////            }
-////        });
-////        runningEnemy.start();
-//    }
 
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+
         randomMove();
         g.setColor(color);
         g.fillOval(this.startX, this.startY, 50, 50);

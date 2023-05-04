@@ -23,39 +23,10 @@ public class Dino extends JComponent implements KeyListener {
         addKeyListener(this);
         setFocusable(true);
         requestFocusInWindow();
-        Thread runningDino = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (true) {
-                    try {
-                        Thread.sleep(80);
-                    } catch (Exception e) {
 
-                    }
-                    repaint();
-                }
-            }
-        });
-        runningDino.start();
     }
 
-//    public void runningDino() {
-////        Thread runningDino = new Thread(new Runnable() {
-////            @Override
-////            public void run() {
-//        while (true) {
-//            try {
-//                wait(80);
-//            } catch (Exception e) {
-//
-//            }
-//
-//            repaint();
-//        }
-////            }
-////        });
-////        runningDino.start();
-//    }
+
 
     @Override
     public void paintComponent(Graphics g) {

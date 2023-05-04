@@ -12,7 +12,8 @@ public class MenuWindow extends JFrame {
     public MenuWindow() {
         generateFrame();
     }
-    public void generateFrame(){
+
+    public void generateFrame() {
         JFrame menuFrame = new JFrame("Menu");
 
         JButton newGameButton = new JButton("New Game");
@@ -41,16 +42,17 @@ public class MenuWindow extends JFrame {
         });
 
         JPanel jPanel = new JPanel();
+        jPanel.setLayout(new BoxLayout(jPanel, BoxLayout.Y_AXIS));
 
-
-
+        jPanel.add(Box.createVerticalGlue());
         jPanel.add(newGameButton);
         jPanel.add(scoresButton);
         jPanel.add(exitButton);
+        jPanel.add(Box.createVerticalGlue());
 
-        menuFrame.add(jPanel);
-
-        menuFrame.setSize(800,600);
+        menuFrame.setContentPane(jPanel);
+        menuFrame.pack();
+        menuFrame.setSize(800, 600);
         menuFrame.setLocationRelativeTo(null);
         menuFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         menuFrame.setVisible(true);
