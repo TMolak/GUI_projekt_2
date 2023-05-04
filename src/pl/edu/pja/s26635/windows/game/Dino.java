@@ -116,4 +116,16 @@ public class Dino extends JComponent implements KeyListener {
     public void keyReleased(KeyEvent e) {
 
     }
+
+//    public Point getDinoPosition(){
+//        return new Point(startX, startY);
+//    }
+
+    public int getStartX() {
+        return startX;
+    }
+
+    public int getStartY() {
+        return startY;
+    }
 }
