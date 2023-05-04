@@ -15,9 +15,10 @@ public class Enemy extends JComponent {
     private int dinoX;
 
     private int dinoY;
+    private Color color;
 
-    public Enemy(int maxX, int maxY, Dino dino) {
-
+    public Enemy(int maxX, int maxY, Dino dino, Color color) {
+        this.color = color;
         this.dinoX = dino.getStartX();
         this.dinoY = dino.getStartY();
 
@@ -25,15 +26,10 @@ public class Enemy extends JComponent {
 
         this.startX = random.nextInt(maxX - 1) + 1;
         this.startY = random.nextInt(maxY - 1) + 1;
-
-        runningEnemy();
-    }
-
-    public void runningEnemy() {
         Thread runningEnemy = new Thread(new Runnable() {
             @Override
             public void run() {
-                while(true) {
+                while (true) {
                     try {
                         Thread.sleep(80);
                     } catch (Exception e) {
@@ -44,19 +40,35 @@ public class Enemy extends JComponent {
             }
         });
         runningEnemy.start();
+
     }
+
+//    public void runningEnemy() {
+////        Thread runningEnemy = new Thread(new Runnable() {
+////            @Override
+////            public void run() {
+//        while (true) {
+//            try {
+//                wait(80);
+//            } catch (Exception e) {
+//
+//            }
+//            repaint();
+//        }
+////            }
+////        });
+////        runningEnemy.start();
+//    }
 
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-
         randomMove();
-
-        g.setColor(Color.RED);
+        g.setColor(color);
         g.fillOval(this.startX, this.startY, 50, 50);
     }
 
-    public void randomMove() {
+    public synchronized void randomMove() {
 
         Random random = new Random();
         int direction = random.nextInt(5);

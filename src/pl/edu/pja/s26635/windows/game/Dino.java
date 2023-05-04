@@ -27,17 +27,36 @@ public class Dino extends JComponent implements KeyListener {
             @Override
             public void run() {
                 while (true) {
-                    repaint();
                     try {
                         Thread.sleep(80);
                     } catch (Exception e) {
 
                     }
+                    repaint();
                 }
             }
         });
         runningDino.start();
     }
+
+//    public void runningDino() {
+////        Thread runningDino = new Thread(new Runnable() {
+////            @Override
+////            public void run() {
+//        while (true) {
+//            try {
+//                wait(80);
+//            } catch (Exception e) {
+//
+//            }
+//
+//            repaint();
+//        }
+////            }
+////        });
+////        runningDino.start();
+//    }
+
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -52,22 +71,22 @@ public class Dino extends JComponent implements KeyListener {
     public synchronized void changePosition() {
         if (leftPress) {
             startX -= change;
-            if (startX <= 0){
+            if (startX <= 0) {
                 startX = 0;
             }
         } else if (rightPress) {
             startX += change;
-            if (startX + 50  >= getWidth()){
-                startX = getWidth()-50;
+            if (startX + 50 >= getWidth()) {
+                startX = getWidth() - 50;
             }
         } else if (upPress) {
             startY -= change;
-            if (startY <= 0){
+            if (startY <= 0) {
                 startY = 0;
             }
         } else if (downPress) {
             startY += change;
-            if (startY + 50 >= getHeight()){
+            if (startY + 50 >= getHeight()) {
                 startY = getHeight() - 50;
             }
         }
