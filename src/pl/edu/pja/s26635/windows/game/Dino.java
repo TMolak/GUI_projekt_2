@@ -39,7 +39,7 @@ public class Dino extends JComponent implements KeyListener {
 
     }
 
-    public synchronized void changePosition() {
+    public void changePosition() {
         if (leftPress) {
             startX -= change;
             if (startX <= 0) {

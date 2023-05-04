@@ -24,10 +24,13 @@ public class GameWindow extends JFrame {
         Dino dino = new Dino((frame.getWidth() / 2), (frame.getHeight() / 2));
         Enemy enemy1 = new Enemy((frame.getWidth() / 2), (frame.getHeight() / 2), dino, Color.BLUE);
         Enemy enemy2 = new Enemy((frame.getWidth() / 2), (frame.getHeight() / 2), dino, Color.RED);
+        Enemy enemy3 = new Enemy((frame.getWidth() / 2), (frame.getHeight() / 2), dino, Color.YELLOW);
+
         List<Enemy> enemyList = new ArrayList<>();
 
         enemyList.add(enemy1);
         enemyList.add(enemy2);
+        enemyList.add(enemy3);
 
         MovingThreads movingThreads = new MovingThreads(dino, enemy1);
         movingThreads.run();
@@ -36,6 +39,7 @@ public class GameWindow extends JFrame {
         jPanel.add(dino);
         jPanel.add(enemy1);
         jPanel.add(enemy2);
+        jPanel.add(enemy3);
         jPanel.add(new Component() {
             @Override
             public void paint(Graphics g) {

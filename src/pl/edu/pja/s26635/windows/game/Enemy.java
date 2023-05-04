@@ -9,7 +9,7 @@ public class Enemy extends JComponent {
     private int startX;
 
     private int startY;
-
+private int currentDirection = 0;
     private int change = 8;
 
     private int dinoX;
@@ -39,26 +39,29 @@ public class Enemy extends JComponent {
         g.fillOval(this.startX, this.startY, 50, 50);
     }
 
-    public synchronized void randomMove() {
+    public void randomMove() {
 
         Random random = new Random();
-        int direction = random.nextInt(5);
-        if (direction == 0) {
+        int direction = random.nextInt(10);
+        if (direction == 0 || direction == 1) {
+            currentDirection = random.nextInt(4);
+        }
+        if (currentDirection == 1) {
             startX -= change;
             if (startX <= 0) {
                 startX = 0;
             }
-        } else if (direction == 1) {
+        } else if (currentDirection == 2) {
             startX += change;
             if (startX + 50 >= getWidth()) {
                 startX = getWidth() - 50;
             }
-        } else if (direction == 2) {
+        } else if (currentDirection == 3) {
             startY -= change;
             if (startY <= 0) {
                 startY = 0;
             }
-        } else if (direction == 3) {
+        } else if (currentDirection == 4) {
             startY += change;
             if (startY + 50 >= getHeight()) {
                 startY = getHeight() - 50;
