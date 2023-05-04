@@ -9,7 +9,7 @@ public class Dino extends JComponent implements KeyListener {
 
     private int startX;
     private int startY;
-    private int change = 5;
+    private int change = 10;
 
     private boolean leftPress = false;
     private boolean rightPress = false;
@@ -29,7 +29,7 @@ public class Dino extends JComponent implements KeyListener {
                 while (true) {
                     repaint();
                     try {
-                        Thread.sleep(100);
+                        Thread.sleep(80);
                     } catch (Exception e) {
 
                     }
@@ -82,27 +82,27 @@ public class Dino extends JComponent implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_A) {
+        if (e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_LEFT) {
             leftPress = true;
             rightPress = false;
             upPress = false;
             downPress = false;
             System.out.println("LEWO");
-        } else if (e.getKeyCode() == KeyEvent.VK_D) {
+        } else if (e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_RIGHT) {
             leftPress = false;
             rightPress = true;
             upPress = false;
             downPress = false;
             System.out.println("PRAWO");
 
-        } else if (e.getKeyCode() == KeyEvent.VK_W) {
+        } else if (e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_UP) {
             leftPress = false;
             rightPress = false;
             upPress = true;
             downPress = false;
             System.out.println("GORA");
 
-        } else if (e.getKeyCode() == KeyEvent.VK_S) {
+        } else if (e.getKeyCode() == KeyEvent.VK_S || e.getKeyCode() == KeyEvent.VK_DOWN) {
             leftPress = false;
             rightPress = false;
             upPress = false;
