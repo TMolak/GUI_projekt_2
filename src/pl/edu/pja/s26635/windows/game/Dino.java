@@ -9,6 +9,11 @@ public class Dino extends JComponent implements KeyListener {
 
     private int startX;
     private int startY;
+
+    private int width;
+
+    private int height;
+
     private int change = 10;
 
     private boolean leftPress = false;
@@ -17,9 +22,11 @@ public class Dino extends JComponent implements KeyListener {
     private boolean downPress = false;
 
 
-    public Dino(int startX, int startY) {
+    public Dino(int startX, int startY, int width, int height) {
         this.startX = startX;
         this.startY = startY;
+        this.width = width;
+        this.height = height;
         addKeyListener(this);
         setFocusable(true);
         requestFocusInWindow();
@@ -35,7 +42,7 @@ public class Dino extends JComponent implements KeyListener {
         changePosition();
 
         g.setColor(Color.GREEN);
-        g.fillOval(this.startX, this.startY, 50, 50);
+        g.fillOval(this.startX, this.startY, width, height);
 
     }
 
@@ -106,10 +113,6 @@ public class Dino extends JComponent implements KeyListener {
     public void keyReleased(KeyEvent e) {
 
     }
-
-//    public Point getDinoPosition(){
-//        return new Point(startX, startY);
-//    }
 
     public int getStartX() {
         return startX;

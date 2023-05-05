@@ -42,6 +42,7 @@ public class MenuWindow extends JFrame {
         });
 
         JPanel jPanel = new JPanel();
+
         jPanel.setLayout(new BoxLayout(jPanel, BoxLayout.Y_AXIS));
 
         jPanel.add(Box.createVerticalGlue());

@@ -17,14 +17,17 @@ public class GameWindow extends JFrame {
     public void generateFrame() {
         JFrame frame = new JFrame("Dino Game");
         JPanel jPanel = new JPanel();
+        JTable jTable = new JTable();
+
         jPanel.setLayout(new OverlayLayout(jPanel));
         frame.setSize(1000, 800);
 
 
-        Dino dino = new Dino((frame.getWidth() / 2), (frame.getHeight() / 2));
-        Enemy enemy1 = new Enemy((frame.getWidth() / 2), (frame.getHeight() / 2), dino, Color.BLUE);
-        Enemy enemy2 = new Enemy((frame.getWidth() / 2), (frame.getHeight() / 2), dino, Color.RED);
-        Enemy enemy3 = new Enemy((frame.getWidth() / 2), (frame.getHeight() / 2), dino, Color.YELLOW);
+        Dino dino = new Dino((frame.getWidth() / 2), (frame.getHeight() / 2), 50, 50);
+        Enemy enemy1 = new Enemy((frame.getWidth() / 2), (frame.getHeight() / 2), dino, Color.BLUE, 50, 50);
+        Enemy enemy2 = new Enemy((frame.getWidth() / 2), (frame.getHeight() / 2), dino, Color.RED, 50, 50);
+        Enemy enemy3 = new Enemy((frame.getWidth() / 2), (frame.getHeight() / 2), dino, Color.YELLOW, 50, 50);
+
 
         List<Enemy> enemyList = new ArrayList<>();
 

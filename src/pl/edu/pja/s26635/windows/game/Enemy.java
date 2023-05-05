@@ -9,7 +9,11 @@ public class Enemy extends JComponent {
     private int startX;
 
     private int startY;
-private int currentDirection = 0;
+
+    private int width;
+
+    private int height;
+    private int currentDirection = 0;
     private int change = 8;
 
     private int dinoX;
@@ -17,11 +21,12 @@ private int currentDirection = 0;
     private int dinoY;
     private Color color;
 
-    public Enemy(int maxX, int maxY, Dino dino, Color color) {
+    public Enemy(int maxX, int maxY, Dino dino, Color color, int width, int height) {
         this.color = color;
         this.dinoX = dino.getStartX();
         this.dinoY = dino.getStartY();
-
+this.width = width;
+this.height = height;
         Random random = new Random();
 
         this.startX = random.nextInt(maxX - 1) + 1;
@@ -36,7 +41,7 @@ private int currentDirection = 0;
 
         randomMove();
         g.setColor(color);
-        g.fillOval(this.startX, this.startY, 50, 50);
+        g.fillOval(this.startX, this.startY, width, height);
     }
 
     public void randomMove() {
