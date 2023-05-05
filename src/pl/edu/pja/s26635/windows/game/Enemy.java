@@ -25,8 +25,8 @@ public class Enemy extends JComponent {
         this.color = color;
         this.dinoX = dino.getStartX();
         this.dinoY = dino.getStartY();
-this.width = width;
-this.height = height;
+        this.width = width;
+        this.height = height;
         Random random = new Random();
 
         this.startX = random.nextInt(maxX - 1) + 1;

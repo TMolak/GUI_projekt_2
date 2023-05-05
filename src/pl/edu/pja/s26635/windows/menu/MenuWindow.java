@@ -43,17 +43,18 @@ public class MenuWindow extends JFrame {
 
         JPanel jPanel = new JPanel();
 
-        jPanel.setLayout(new BoxLayout(jPanel, BoxLayout.Y_AXIS));
+        jPanel.setLayout(new GridLayout(3, 1));
 
-        jPanel.add(Box.createVerticalGlue());
+
         jPanel.add(newGameButton);
         jPanel.add(scoresButton);
         jPanel.add(exitButton);
-        jPanel.add(Box.createVerticalGlue());
 
-        menuFrame.setContentPane(jPanel);
-        menuFrame.pack();
+        menuFrame.setLayout(new BorderLayout());
+        menuFrame.add(jPanel, BorderLayout.CENTER);
+
         menuFrame.setSize(800, 600);
+        menuFrame.setContentPane(jPanel);
         menuFrame.setLocationRelativeTo(null);
         menuFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         menuFrame.setVisible(true);

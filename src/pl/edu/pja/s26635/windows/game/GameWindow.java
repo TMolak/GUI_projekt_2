@@ -5,10 +5,15 @@ import pl.edu.pja.s26635.windows.game.threads.MovingThreads;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class GameWindow extends JFrame {
+    private Dino dino;
+    private List<Enemy> enemyList;
 
     public GameWindow() {
         generateFrame();
@@ -16,20 +21,19 @@ public class GameWindow extends JFrame {
 
     public void generateFrame() {
         JFrame frame = new JFrame("Dino Game");
-        JPanel jPanel = new JPanel();
-        JTable jTable = new JTable();
-
+        JPanel jPanel = new JPanel(new FlowLayout());
         jPanel.setLayout(new OverlayLayout(jPanel));
-        frame.setSize(1000, 800);
+        JTable jTable = new JTable(10, 10);
 
 
-        Dino dino = new Dino((frame.getWidth() / 2), (frame.getHeight() / 2), 50, 50);
-        Enemy enemy1 = new Enemy((frame.getWidth() / 2), (frame.getHeight() / 2), dino, Color.BLUE, 50, 50);
-        Enemy enemy2 = new Enemy((frame.getWidth() / 2), (frame.getHeight() / 2), dino, Color.RED, 50, 50);
-        Enemy enemy3 = new Enemy((frame.getWidth() / 2), (frame.getHeight() / 2), dino, Color.YELLOW, 50, 50);
 
 
-        List<Enemy> enemyList = new ArrayList<>();
+        dino = new Dino((20 / 2), (20 / 2), 50, 50);
+        Enemy enemy1 = new Enemy((10 / 2), (10 / 2), dino, Color.BLUE, 50, 50);
+        Enemy enemy2 = new Enemy((10 / 2), (10 / 2), dino, Color.RED, 50, 50);
+        Enemy enemy3 = new Enemy((10 / 2), (10 / 2), dino, Color.YELLOW, 50, 50);
+
+        enemyList = new ArrayList<>();
 
         enemyList.add(enemy1);
         enemyList.add(enemy2);
@@ -37,23 +41,31 @@ public class GameWindow extends JFrame {
 
         MovingThreads movingThreads = new MovingThreads(dino, enemy1);
         movingThreads.run();
-
+//        contactBtwComp();
 
         jPanel.add(dino);
         jPanel.add(enemy1);
         jPanel.add(enemy2);
         jPanel.add(enemy3);
-        jPanel.add(new Component() {
-            @Override
-            public void paint(Graphics g) {
-                super.paint(g);
-                g.setColor(Color.PINK);
-                g.fillOval(300, 200, 40, 40);
-            }
-        });
+        jPanel.add(jTable);
         frame.setContentPane(jPanel);
+        frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
     }
+
+    public void contactBtwComp() {
+
+        Rectangle rectangleA = dino.getBounds();
+
+        for (Enemy enemy : enemyList) {
+            Rectangle rectangleB = enemy.getBounds();
+            if (rectangleA.intersects(rectangleB)) {
+                System.out.println("Contact!!!");
+            }
+        }
+
+    }
+
 }
