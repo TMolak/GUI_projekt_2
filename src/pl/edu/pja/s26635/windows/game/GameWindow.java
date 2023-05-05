@@ -21,32 +21,32 @@ public class GameWindow extends JFrame {
 
     public void generateFrame() {
         JFrame frame = new JFrame("Dino Game");
-        JPanel jPanel = new JPanel(new FlowLayout());
+        JPanel jPanel = new JPanel();
+        JTable jTable = new JTable(50, 50);
+
         jPanel.setLayout(new OverlayLayout(jPanel));
-        JTable jTable = new JTable(10, 10);
+        frame.setSize(1000, 800);
 
 
-
-
-        dino = new Dino((20 / 2), (20 / 2), 50, 50);
-        Enemy enemy1 = new Enemy((10 / 2), (10 / 2), dino, Color.BLUE, 50, 50);
-        Enemy enemy2 = new Enemy((10 / 2), (10 / 2), dino, Color.RED, 50, 50);
-        Enemy enemy3 = new Enemy((10 / 2), (10 / 2), dino, Color.YELLOW, 50, 50);
+        dino = new Dino((frame.getWidth() / 2), (frame.getHeight() / 2), 50, 50);
+        Enemy enemy1 = new Enemy((frame.getWidth() / 2), (frame.getHeight() / 2), dino, Color.BLUE, 50, 50);
+//        Enemy enemy2 = new Enemy((frame.getWidth() / 2), (frame.getHeight() / 2), dino, Color.RED, 50, 50);
+//        Enemy enemy3 = new Enemy((frame.getWidth() / 2), (frame.getHeight() / 2), dino, Color.YELLOW, 50, 50);
 
         enemyList = new ArrayList<>();
 
         enemyList.add(enemy1);
-        enemyList.add(enemy2);
-        enemyList.add(enemy3);
+//        enemyList.add(enemy2);
+//        enemyList.add(enemy3);
 
         MovingThreads movingThreads = new MovingThreads(dino, enemy1);
+        movingThreads.touchInfo();
         movingThreads.run();
-//        contactBtwComp();
 
         jPanel.add(dino);
         jPanel.add(enemy1);
-        jPanel.add(enemy2);
-        jPanel.add(enemy3);
+//        jPanel.add(enemy2);
+//        jPanel.add(enemy3);
         jPanel.add(jTable);
         frame.setContentPane(jPanel);
         frame.pack();
@@ -55,17 +55,6 @@ public class GameWindow extends JFrame {
 
     }
 
-    public void contactBtwComp() {
 
-        Rectangle rectangleA = dino.getBounds();
-
-        for (Enemy enemy : enemyList) {
-            Rectangle rectangleB = enemy.getBounds();
-            if (rectangleA.intersects(rectangleB)) {
-                System.out.println("Contact!!!");
-            }
-        }
-
-    }
 
 }

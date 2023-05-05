@@ -24,6 +24,7 @@ public class MenuWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 GameWindow gameWindow = new GameWindow();
+
             }
         });
 
