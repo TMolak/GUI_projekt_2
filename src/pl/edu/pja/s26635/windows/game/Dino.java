@@ -44,7 +44,7 @@ public class Dino extends JComponent implements KeyListener{
         super.paintComponent(g);
 
         changePosition();
-        ImageIcon imageIcon = new ImageIcon("src/graphics/dino_walk_1.jpg");
+        ImageIcon imageIcon = new ImageIcon("src/graphics/dino_walk_1.png");
 
         g.drawImage(imageIcon.getImage(),this.startX, this.startY, this);
 
