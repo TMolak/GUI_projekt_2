@@ -18,6 +18,7 @@ public class Dino extends JComponent implements KeyListener{
 
     private int change = 10;
 
+
     private boolean leftPress = false;
     private boolean rightPress = false;
     private boolean upPress = false;
@@ -29,6 +30,7 @@ public class Dino extends JComponent implements KeyListener{
         this.startY = startY;
         this.width = width;
         this.height = height;
+
         addKeyListener(this);
         setFocusable(true);
         requestFocusInWindow();
@@ -42,9 +44,9 @@ public class Dino extends JComponent implements KeyListener{
         super.paintComponent(g);
 
         changePosition();
+        ImageIcon imageIcon = new ImageIcon("src/graphics/dino_walk_1.jpg");
 
-        g.setColor(Color.GREEN);
-        g.fillOval(this.startX, this.startY, width, height);
+        g.drawImage(imageIcon.getImage(),this.startX, this.startY, this);
 
     }
 

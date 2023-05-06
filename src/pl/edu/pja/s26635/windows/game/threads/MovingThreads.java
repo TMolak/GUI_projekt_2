@@ -32,11 +32,7 @@ public class MovingThreads implements Runnable {
                     } catch (Exception e) {
 
                     }
-                    if (rectangleA.intersects(rectangleB)) {
-                        touch = true;
-                    } else {
-                        touch = false;
-                    }
+
                     touchInfo();
                     dino.repaint();
                 }
