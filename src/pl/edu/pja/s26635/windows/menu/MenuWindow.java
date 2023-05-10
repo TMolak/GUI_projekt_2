@@ -1,6 +1,7 @@
 package pl.edu.pja.s26635.windows.menu;
 
 import pl.edu.pja.s26635.windows.game.GameWindow;
+import pl.edu.pja.s26635.windows.game.SizeSelector;
 import pl.edu.pja.s26635.windows.scores.HighScoresWindow;
 
 import javax.swing.*;
@@ -23,8 +24,8 @@ public class MenuWindow extends JFrame {
         newGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                GameWindow gameWindow = new GameWindow();
-
+//                GameWindow gameWindow = new GameWindow();
+                SizeSelector sizeSelector = new SizeSelector();
             }
         });
 
