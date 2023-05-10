@@ -11,12 +11,12 @@ public class MovingThreads implements Runnable {
     private Dino dino;
 
     private Enemy enemy;
-    private boolean touch;
+
 
     public MovingThreads(Dino dino, Enemy enemy) {
         this.enemy = enemy;
         this.dino = dino;
-        this.touch = false;
+
     }
 
     @Override
@@ -32,8 +32,6 @@ public class MovingThreads implements Runnable {
                     } catch (Exception e) {
 
                     }
-
-                    touchInfo();
                     dino.repaint();
                 }
             });
@@ -54,8 +52,5 @@ public class MovingThreads implements Runnable {
         }
     }
 
-    public void touchInfo() {
-        System.out.println(touch);
-    }
 
 }

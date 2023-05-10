@@ -20,7 +20,8 @@ public class GameWindow extends JFrame {
     public void generateFrame() {
         JFrame frame = new JFrame("Dino Game");
         JPanel jPanel = new JPanel();
-        JTable jTable = new JTable(50, 77);
+
+        JTable jTable = new JTable(SizeSelector.getValueX(), SizeSelector.getValueY());
         jTable.setRowHeight(30);
         jTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         //rysowanie pol
@@ -44,7 +45,7 @@ public class GameWindow extends JFrame {
 //        enemyList.add(enemy3);
 
         MovingThreads movingThreads = new MovingThreads(dino, enemy1);
-        movingThreads.touchInfo();
+
         movingThreads.run();
 
         jPanel.add(dino);

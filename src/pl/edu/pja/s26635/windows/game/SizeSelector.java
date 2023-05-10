@@ -2,12 +2,14 @@ package pl.edu.pja.s26635.windows.game;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class SizeSelector extends JFrame {
 
-    private int valueX;
+    private static int valueX;
 
-    private int valueY;
+    private static int valueY;
 
 
     public SizeSelector(){
@@ -16,7 +18,7 @@ public class SizeSelector extends JFrame {
     }
 
     public void generateFrame(){
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         setLayout(new BorderLayout());
 
         JLabel labelX = new JLabel();
@@ -39,14 +41,32 @@ public class SizeSelector extends JFrame {
             labelY.setText("Wartosc y = "+ valueY);
         });
 
+        JButton startGameButton = new JButton("Start game");
+
+        startGameButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                GameWindow gameWindow = new GameWindow();
+
+            }
+        });
+
         JPanel jPanel = new JPanel(new GridLayout(3, 1));
         jPanel.add(sliderX);
         jPanel.add(labelX);
         jPanel.add(sliderY);
         jPanel.add(labelY);
-
+        jPanel.add(startGameButton);
         getContentPane().add(jPanel, BorderLayout.CENTER);
         pack();
         setVisible(true);
+    }
+
+    public static int getValueX() {
+        return valueX;
+    }
+
+    public static int getValueY() {
+        return valueY;
     }
 }
