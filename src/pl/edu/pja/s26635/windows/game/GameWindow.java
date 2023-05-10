@@ -18,7 +18,6 @@ public class GameWindow extends JFrame {
     }
 
     public void generateFrame() {
-        JFrame frame = new JFrame("Dino Game");
         JPanel jPanel = new JPanel();
 
         JTable jTable = new JTable(SizeSelector.getValueX(), SizeSelector.getValueY());
@@ -33,11 +32,11 @@ public class GameWindow extends JFrame {
 
         jPanel.setLayout(new OverlayLayout(jPanel));
 
-        frame.setSize(800, 800);
+        setSize(800, 800);
 
 
-        dino = new Dino((frame.getWidth() / 2), (frame.getHeight() / 2), 100, 100);
-        Enemy enemy1 = new Enemy((frame.getWidth() / 2), (frame.getHeight() / 2), dino, Color.BLUE, 50, 50);
+        dino = new Dino((getWidth() / 2), (getHeight() / 2), 100, 100);
+        Enemy enemy1 = new Enemy((getWidth() / 2), (getHeight() / 2), dino, Color.BLUE, 50, 50);
 //        Enemy enemy2 = new Enemy((frame.getWidth() / 2), (frame.getHeight() / 2), dino, Color.RED, 50, 50);
 //        Enemy enemy3 = new Enemy((frame.getWidth() / 2), (frame.getHeight() / 2), dino, Color.YELLOW, 50, 50);
 
@@ -56,10 +55,10 @@ public class GameWindow extends JFrame {
 //        jPanel.add(enemy2);
 //        jPanel.add(enemy3);
         jPanel.add(jTable);
-        frame.setContentPane(jPanel);
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
+        setContentPane(jPanel);
+        pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
 
     }
 
