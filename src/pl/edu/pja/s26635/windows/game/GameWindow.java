@@ -1,12 +1,10 @@
 package pl.edu.pja.s26635.windows.game;
 
-import pl.edu.pja.s26635.windows.game.threads.DinoThread;
+import pl.edu.pja.s26635.windows.game.model.CustomCellRenderer;
 import pl.edu.pja.s26635.windows.game.threads.MovingThreads;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,10 +20,16 @@ public class GameWindow extends JFrame {
     public void generateFrame() {
         JFrame frame = new JFrame("Dino Game");
         JPanel jPanel = new JPanel();
-//        JTable jTable = new JTable(50, 50);
+        JTable jTable = new JTable(50, 77);
+        jTable.setRowHeight(30);
+        jTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        //rysowanie pol
+        CustomCellRenderer test = new CustomCellRenderer();
+        jTable.setDefaultRenderer(Object.class, test);
 
         jPanel.setLayout(new OverlayLayout(jPanel));
-        frame.setSize(1000, 800);
+
+        frame.setSize(800, 800);
 
 
         dino = new Dino((frame.getWidth() / 2), (frame.getHeight() / 2), 100, 100);
@@ -47,14 +51,13 @@ public class GameWindow extends JFrame {
         jPanel.add(enemy1);
 //        jPanel.add(enemy2);
 //        jPanel.add(enemy3);
-//        jPanel.add(jTable);
+        jPanel.add(jTable);
         frame.setContentPane(jPanel);
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
     }
-
 
 
 }
