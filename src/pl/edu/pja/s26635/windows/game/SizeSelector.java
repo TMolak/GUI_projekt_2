@@ -21,8 +21,8 @@ public class SizeSelector extends JFrame {
 
         setLayout(new BorderLayout());
 
-        JLabel labelX = new JLabel();
-        JLabel labelY = new JLabel();
+        JLabel labelX = new JLabel("Wartosc x = "+ 50);
+        JLabel labelY = new JLabel("Wartosc y = "+ 50);
 
         JSlider sliderX = new JSlider(JSlider.HORIZONTAL, 10, 100, 50);
         JSlider sliderY = new JSlider(JSlider.HORIZONTAL, 10, 100, 50);

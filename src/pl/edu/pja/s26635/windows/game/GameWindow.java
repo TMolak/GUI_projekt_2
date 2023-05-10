@@ -22,7 +22,10 @@ public class GameWindow extends JFrame {
         JPanel jPanel = new JPanel();
 
         JTable jTable = new JTable(SizeSelector.getValueX(), SizeSelector.getValueY());
-        jTable.setRowHeight(30);
+        jTable.setRowHeight(10);
+        for (int i = 0; i < SizeSelector.getValueX(); i++) {
+            jTable.getColumnModel().getColumn(i).setPreferredWidth(10);
+        }
         jTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         //rysowanie pol
         CustomCellRenderer test = new CustomCellRenderer();
