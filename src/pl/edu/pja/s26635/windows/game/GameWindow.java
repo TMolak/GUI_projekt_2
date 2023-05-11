@@ -21,9 +21,9 @@ public class GameWindow extends JFrame {
         JPanel jPanel = new JPanel();
 
         JTable jTable = new JTable(SizeSelector.getValueX(), SizeSelector.getValueY());
-        jTable.setRowHeight(10);
+        jTable.setRowHeight(30);
         for (int i = 0; i < SizeSelector.getValueX(); i++) {
-            jTable.getColumnModel().getColumn(i).setPreferredWidth(10);
+            jTable.getColumnModel().getColumn(i).setPreferredWidth(30);
         }
         jTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         //rysowanie pol
@@ -35,7 +35,7 @@ public class GameWindow extends JFrame {
         setSize(800, 800);
 
 
-        dino = new Dino((getWidth() / 2), (getHeight() / 2), 100, 100);
+        dino = new Dino((3), (4), 50, 50);
         Enemy enemy1 = new Enemy((getWidth() / 2), (getHeight() / 2), dino, Color.BLUE, 50, 50);
 //        Enemy enemy2 = new Enemy((frame.getWidth() / 2), (frame.getHeight() / 2), dino, Color.RED, 50, 50);
 //        Enemy enemy3 = new Enemy((frame.getWidth() / 2), (frame.getHeight() / 2), dino, Color.YELLOW, 50, 50);

@@ -22,8 +22,7 @@ public class MovingThreads implements Runnable {
     @Override
     public void run() {
         synchronized (enemy) {
-            Rectangle rectangleA = dino.getBounds();
-            Rectangle rectangleB = enemy.getBounds();
+
             Thread t2 = new Thread(() -> {
                 while (true) {
                     try {

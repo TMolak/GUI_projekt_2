@@ -12,7 +12,7 @@ public class CustomCellRenderer extends DefaultTableCellRenderer {
 
 //        Random random = new Random();
 //        int ran = random.nextInt(10);
-        if ((row & 2) == 0 && (column&2) == 0) {
+        if ((row % 2) == 0 && (column % 2) == 0) {
             component.setBackground(Color.RED);
         } else {
             component.setBackground(table.getBackground());

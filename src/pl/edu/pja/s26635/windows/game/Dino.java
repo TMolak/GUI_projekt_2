@@ -8,14 +8,16 @@ import java.awt.event.KeyListener;
 
 public class Dino extends JComponent implements KeyListener {
 
-    private int startX;
-    private int startY;
+//    private int startX;
+    private int column;
+//    private int startY;
+    private int row;
 
     private int width;
 
     private int height;
 
-    private int change = 10;
+    private int change = 1;
 
 
     private boolean leftPress = false;
@@ -24,10 +26,10 @@ public class Dino extends JComponent implements KeyListener {
     private boolean downPress = false;
 
 
-    public Dino(int startX, int startY, int width, int height) {
+    public Dino(int column, int row, int width, int height) {
 
-        this.startX = startX;
-        this.startY = startY;
+        this.column = column;
+        this.row = row;
         this.width = width;
         this.height = height;
 
@@ -46,30 +48,26 @@ public class Dino extends JComponent implements KeyListener {
         changePosition();
         ImageIcon imageIcon = new ImageIcon("src/graphics/dino_walk_1.png");
 
-        g.drawImage(imageIcon.getImage(),this.startX, this.startY, this);
+        g.drawImage(imageIcon.getImage(),this.column, this.row, this);
 
     }
 
     public void changePosition() {
         if (leftPress) {
-            startX -= change;
-            if (startX <= 0) {
-                startX = 0;
+            if (column > 0 && !illegalCell()) {
+                column--;
             }
         } else if (rightPress) {
-            startX += change;
-            if (startX + 50 >= getWidth()) {
-                startX = getWidth() - 50;
+            if (column < getWidth()-1 && !illegalCell()) {
+                column++;
             }
-        } else if (upPress) {
-            startY -= change;
-            if (startY <= 0) {
-                startY = 0;
+        } else if (upPress && !illegalCell()) {
+            if (row > 0) {
+                row--;
             }
-        } else if (downPress) {
-            startY += change;
-            if (startY + 50 >= getHeight()) {
-                startY = getHeight() - 50;
+        } else if (downPress && !illegalCell()) {
+            if (row < getHeight()-1) {
+                row++;
             }
         }
 
@@ -118,12 +116,20 @@ public class Dino extends JComponent implements KeyListener {
 
     }
 
-    public int getStartX() {
-        return startX;
+    private boolean illegalCell(){
+        if ((this.row % 2) == 0 && (this.column%2) == 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    public int getStartY() {
-        return startY;
+    public int getStartColumn() {
+        return column;
+    }
+
+    public int getStartRow() {
+        return column;
     }
 
 

@@ -23,8 +23,8 @@ public class Enemy extends JComponent {
 
     public Enemy(int maxX, int maxY, Dino dino, Color color, int width, int height) {
         this.color = color;
-        this.dinoX = dino.getStartX();
-        this.dinoY = dino.getStartY();
+//        this.dinoX = dino.getStartX();
+//        this.dinoY = dino.getStartY();
         this.width = width;
         this.height = height;
         Random random = new Random();
