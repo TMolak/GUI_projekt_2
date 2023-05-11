@@ -54,19 +54,27 @@ public class Dino extends JComponent implements KeyListener {
 
     public void changePosition() {
         if (leftPress) {
-            if (column > 0 && !illegalCell()) {
+            if (column > 0) {
+                if (illegalCell())
+                    System.out.println("CZERWONA KOMORKA");
                 column--;
             }
         } else if (rightPress) {
-            if (column < getWidth()-1 && !illegalCell()) {
+            if (column < getWidth()-1) {
+                if (illegalCell())
+                    System.out.println("CZERWONA KOMORKA");
                 column++;
             }
-        } else if (upPress && !illegalCell()) {
+        } else if (upPress) {
             if (row > 0) {
+                if (illegalCell())
+                    System.out.println("CZERWONA KOMORKA");
                 row--;
             }
-        } else if (downPress && !illegalCell()) {
+        } else if (downPress) {
             if (row < getHeight()-1) {
+                if (illegalCell())
+                    System.out.println("CZERWONA KOMORKA");
                 row++;
             }
         }
