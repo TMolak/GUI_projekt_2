@@ -1,4 +1,4 @@
-package pl.edu.pja.s26635.windows.game;
+package pl.edu.pja.s26635.model;
 
 import javax.swing.*;
 import java.awt.*;

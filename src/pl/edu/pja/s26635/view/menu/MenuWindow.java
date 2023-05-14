@@ -1,8 +1,7 @@
-package pl.edu.pja.s26635.windows.menu;
+package pl.edu.pja.s26635.view.menu;
 
-import pl.edu.pja.s26635.windows.game.GameWindow;
-import pl.edu.pja.s26635.windows.game.SizeSelector;
-import pl.edu.pja.s26635.windows.scores.HighScoresWindow;
+import pl.edu.pja.s26635.view.game.frame.SizeSelector;
+import pl.edu.pja.s26635.view.scores.HighScoresWindow;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,7 +14,6 @@ public class MenuWindow extends JFrame {
     }
 
     public void generateFrame() {
-        JFrame menuFrame = new JFrame("Menu");
 
         JButton newGameButton = new JButton("New Game");
         JButton scoresButton = new JButton("High Scores");
@@ -43,22 +41,18 @@ public class MenuWindow extends JFrame {
             }
         });
 
-        JPanel jPanel = new JPanel();
-
-        jPanel.setLayout(new GridLayout(3, 1));
-
+        JPanel jPanel = new JPanel(new GridLayout(3, 3));
 
         jPanel.add(newGameButton);
         jPanel.add(scoresButton);
         jPanel.add(exitButton);
 
-        menuFrame.setLayout(new BorderLayout());
-        menuFrame.add(jPanel, BorderLayout.CENTER);
+        add(jPanel);
 
-        menuFrame.setSize(800, 600);
-        menuFrame.setContentPane(jPanel);
-        menuFrame.setLocationRelativeTo(null);
-        menuFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        menuFrame.setVisible(true);
+        setSize(800, 600);
+        setContentPane(jPanel);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setVisible(true);
     }
 }

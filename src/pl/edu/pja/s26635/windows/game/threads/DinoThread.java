@@ -1,6 +1,6 @@
 package pl.edu.pja.s26635.windows.game.threads;
 
-import pl.edu.pja.s26635.windows.game.Dino;
+import pl.edu.pja.s26635.model.Dino;
 
 public class DinoThread extends Thread{
     private Dino dino;

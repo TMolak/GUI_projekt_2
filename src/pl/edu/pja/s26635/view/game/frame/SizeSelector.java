@@ -1,4 +1,4 @@
-package pl.edu.pja.s26635.windows.game;
+package pl.edu.pja.s26635.view.game.frame;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,8 +27,6 @@ public class SizeSelector extends JFrame {
         JSlider sliderX = new JSlider(JSlider.HORIZONTAL, 10, 100, 50);
         JSlider sliderY = new JSlider(JSlider.HORIZONTAL, 10, 100, 50);
 
-        sliderX.setMajorTickSpacing(10);
-        sliderX.setMinorTickSpacing(5);
         sliderX.addChangeListener(n ->{
            valueX = sliderX.getValue();
             labelX.setText("Wartosc x = "+ valueX);
@@ -46,7 +44,7 @@ public class SizeSelector extends JFrame {
         startGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                GameWindow gameWindow = new GameWindow();
+                GameWindoweBeta gameWindoweBeta = new GameWindoweBeta();
 
             }
         });
@@ -60,6 +58,7 @@ public class SizeSelector extends JFrame {
         getContentPane().add(jPanel, BorderLayout.CENTER);
         pack();
         setVisible(true);
+
     }
 
     public static int getValueX() {

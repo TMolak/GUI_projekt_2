@@ -1,19 +1,23 @@
-package pl.edu.pja.s26635.windows.game;
+package pl.edu.pja.s26635.view.game.frame;
 
+import pl.edu.pja.s26635.model.Dino;
+import pl.edu.pja.s26635.model.Enemy;
+import pl.edu.pja.s26635.view.game.frame.SizeSelector;
 import pl.edu.pja.s26635.windows.game.model.CustomCellRenderer;
 import pl.edu.pja.s26635.windows.game.threads.MovingThreads;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class GameWindow extends JFrame {
+public class GameWindoweBeta extends JFrame  {
     private Dino dino;
     private List<Enemy> enemyList;
 
-    public GameWindow() {
+    public GameWindoweBeta() {
         generateFrame();
     }
 
@@ -21,21 +25,23 @@ public class GameWindow extends JFrame {
         JPanel jPanel = new JPanel();
 
         JTable jTable = new JTable(SizeSelector.getValueX(), SizeSelector.getValueY());
-        jTable.setRowHeight(30);
+        jTable.setRowHeight(55);
         for (int i = 0; i < SizeSelector.getValueX(); i++) {
-            jTable.getColumnModel().getColumn(i).setPreferredWidth(30);
+            jTable.getColumnModel().getColumn(i).setPreferredWidth(55);
         }
         jTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
+
         //rysowanie pol
-        CustomCellRenderer test = new CustomCellRenderer();
-        jTable.setDefaultRenderer(Object.class, test);
+        CustomCellRenderer renderer = new CustomCellRenderer();
+
+        jTable.setDefaultRenderer(Object.class, renderer);
 
         jPanel.setLayout(new OverlayLayout(jPanel));
 
         setSize(800, 800);
 
-
-        dino = new Dino((3), (4), 50, 50);
+//        dino = new Dino(1, 1, 50, 50);
         Enemy enemy1 = new Enemy((getWidth() / 2), (getHeight() / 2), dino, Color.BLUE, 50, 50);
 //        Enemy enemy2 = new Enemy((frame.getWidth() / 2), (frame.getHeight() / 2), dino, Color.RED, 50, 50);
 //        Enemy enemy3 = new Enemy((frame.getWidth() / 2), (frame.getHeight() / 2), dino, Color.YELLOW, 50, 50);
@@ -46,20 +52,20 @@ public class GameWindow extends JFrame {
 //        enemyList.add(enemy2);
 //        enemyList.add(enemy3);
 
-        MovingThreads movingThreads = new MovingThreads(dino, enemy1);
-
+        MovingThreads movingThreads = new MovingThreads(dino);
         movingThreads.run();
+        DefaultTableModel model = (DefaultTableModel) jTable.getModel();
 
-        jPanel.add(dino);
+        jPanel.add(jTable);
+        jTable.add(dino);
         jPanel.add(enemy1);
 //        jPanel.add(enemy2);
 //        jPanel.add(enemy3);
-        jPanel.add(jTable);
         setContentPane(jPanel);
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
-
+        jTable.requestFocusInWindow();
     }
 
 
