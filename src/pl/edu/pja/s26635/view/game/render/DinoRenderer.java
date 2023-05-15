@@ -1,4 +1,4 @@
-package pl.edu.pja.s26635.view.game;
+package pl.edu.pja.s26635.view.game.render;
 
 import pl.edu.pja.s26635.model.Dino;
 

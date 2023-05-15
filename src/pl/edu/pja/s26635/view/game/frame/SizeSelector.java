@@ -12,31 +12,31 @@ public class SizeSelector extends JFrame {
     private static int valueY;
 
 
-    public SizeSelector(){
+    public SizeSelector() {
         super("Size Selector");
         generateFrame();
     }
 
-    public void generateFrame(){
+    public void generateFrame() {
 
         setLayout(new BorderLayout());
 
-        JLabel labelX = new JLabel("Wartosc x = "+ 50);
-        JLabel labelY = new JLabel("Wartosc y = "+ 50);
+        JLabel labelX = new JLabel("Wartosc x = " + 50);
+        JLabel labelY = new JLabel("Wartosc y = " + 50);
 
         JSlider sliderX = new JSlider(JSlider.HORIZONTAL, 10, 100, 50);
         JSlider sliderY = new JSlider(JSlider.HORIZONTAL, 10, 100, 50);
 
-        sliderX.addChangeListener(n ->{
-           valueX = sliderX.getValue();
-            labelX.setText("Wartosc x = "+ valueX);
+        sliderX.addChangeListener(n -> {
+            valueX = sliderX.getValue();
+            labelX.setText("Wartosc x = " + valueX);
         });
 
         sliderY.setMajorTickSpacing(10);
         sliderY.setMinorTickSpacing(5);
-        sliderY.addChangeListener(n ->{
+        sliderY.addChangeListener(n -> {
             valueY = sliderY.getValue();
-            labelY.setText("Wartosc y = "+ valueY);
+            labelY.setText("Wartosc y = " + valueY);
         });
 
         JButton startGameButton = new JButton("Start game");
@@ -44,8 +44,8 @@ public class SizeSelector extends JFrame {
         startGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                GameWindoweBeta gameWindoweBeta = new GameWindoweBeta();
-
+//                GameWindoweBeta gameWindoweBeta = new GameWindoweBeta();
+                GameWindow gameWindow = new GameWindow();
             }
         });
 

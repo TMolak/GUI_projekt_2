@@ -1,8 +1,8 @@
 package pl.edu.pja.s26635.view.game.frame;
 
-import pl.edu.pja.s26635.controller.DinoController;
 import pl.edu.pja.s26635.model.Dino;
-import pl.edu.pja.s26635.view.game.DinoRenderer;
+import pl.edu.pja.s26635.view.game.render.DinoRenderer;
+import pl.edu.pja.s26635.view.game.render.MazeRenderer;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -18,8 +18,8 @@ public class GameWindow extends JFrame implements KeyListener {
     }
 
     public void generateFrame() {
-//        tableModel = new DefaultTableModel(SizeSelector.getValueX(), SizeSelector.getValueY());
-        tableModel = new DefaultTableModel(10, 10);
+        tableModel = new DefaultTableModel(SizeSelector.getValueX(), SizeSelector.getValueY());
+//        tableModel = new DefaultTableModel(10, 10);
         table = new JTable(tableModel);
 
         table.setRowHeight(55);
@@ -28,8 +28,11 @@ public class GameWindow extends JFrame implements KeyListener {
         }
         dino = new Dino(40, 40, 4, 6);
         DinoRenderer renderer = new DinoRenderer(dino);
+        MazeRenderer mazeRenderer = new MazeRenderer();
+
         tableModel.setValueAt(dino, dino.getRow(), dino.getColumn());
         table.setDefaultRenderer(Object.class, renderer);
+        table.setDefaultRenderer(Object.class, mazeRenderer);
 
         table.setFocusable(true);
         table.addKeyListener(this);
@@ -52,9 +55,9 @@ public class GameWindow extends JFrame implements KeyListener {
         int row = dino.getRow();
         if (e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_LEFT) {
             if (column > 0) {
-                tableModel.setValueAt(null, row, column); // usuń Dino z poprzedniej komórki
+                tableModel.setValueAt(null, row, column);
                 dino.setColumn(--column);
-                tableModel.setValueAt(dino, row, column); // ustaw Dino w nowej komórce
+                tableModel.setValueAt(dino, row, column);
             }
             System.out.println("LEWO");
         } else if (e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_RIGHT) {
@@ -84,6 +87,10 @@ public class GameWindow extends JFrame implements KeyListener {
         }
 
     }
+//
+//    public boolean illegalCell(){
+//        if ()
+//    }
 
     @Override
     public void keyReleased(KeyEvent e) {

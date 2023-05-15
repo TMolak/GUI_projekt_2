@@ -2,8 +2,7 @@ package pl.edu.pja.s26635.view.game.frame;
 
 import pl.edu.pja.s26635.model.Dino;
 import pl.edu.pja.s26635.model.Enemy;
-import pl.edu.pja.s26635.view.game.frame.SizeSelector;
-import pl.edu.pja.s26635.windows.game.model.CustomCellRenderer;
+import pl.edu.pja.s26635.view.game.render.MazeRenderer;
 import pl.edu.pja.s26635.windows.game.threads.MovingThreads;
 
 import javax.swing.*;
@@ -33,7 +32,7 @@ public class GameWindoweBeta extends JFrame  {
 
 
         //rysowanie pol
-        CustomCellRenderer renderer = new CustomCellRenderer();
+        MazeRenderer renderer = new MazeRenderer();
 
         jTable.setDefaultRenderer(Object.class, renderer);
 

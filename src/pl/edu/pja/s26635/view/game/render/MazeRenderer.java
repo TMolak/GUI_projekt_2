@@ -1,4 +1,4 @@
-package pl.edu.pja.s26635.windows.game.model;
+package pl.edu.pja.s26635.view.game.render;
 
 import pl.edu.pja.s26635.model.Dino;
 
@@ -6,7 +6,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 
-public class CustomCellRenderer extends DefaultTableCellRenderer {
+public class MazeRenderer extends DefaultTableCellRenderer {
 
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
@@ -16,11 +16,6 @@ public class CustomCellRenderer extends DefaultTableCellRenderer {
         } else {
             component.setBackground(table.getBackground());
         }
-        if (value instanceof Dino) {
-
-            return (Component) value;
-        }
-
         return component;
 
     }
