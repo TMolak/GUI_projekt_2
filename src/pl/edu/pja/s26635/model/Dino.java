@@ -11,10 +11,16 @@ public class Dino extends JComponent{
 
     private int height;
 
+    private int column;
 
-    public Dino(int width, int height) {
+    private int row;
+
+
+    public Dino(int width, int height, int column, int row) {
         this.width = width;
         this.height = height;
+        this.column = column;
+        this.row = row;
         setPreferredSize(new Dimension(width, height));
     }
 
@@ -25,6 +31,22 @@ public class Dino extends JComponent{
         ImageIcon imageIcon = new ImageIcon("src/graphics/dino_walk_1.png");
 
         g.drawImage(imageIcon.getImage(), 0,0, width, height, this);
+    }
+
+    public int getColumn() {
+        return column;
+    }
+
+    public void setColumn(int column) {
+        this.column = column;
+    }
+
+    public int getRow() {
+        return row;
+    }
+
+    public void setRow(int row) {
+        this.row = row;
     }
 
     @Override

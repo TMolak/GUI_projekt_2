@@ -41,7 +41,7 @@ public class GameWindoweBeta extends JFrame  {
 
         setSize(800, 800);
 
-//        dino = new Dino(1, 1, 50, 50);
+        dino = new Dino(50, 50, 5, 6);
         Enemy enemy1 = new Enemy((getWidth() / 2), (getHeight() / 2), dino, Color.BLUE, 50, 50);
 //        Enemy enemy2 = new Enemy((frame.getWidth() / 2), (frame.getHeight() / 2), dino, Color.RED, 50, 50);
 //        Enemy enemy3 = new Enemy((frame.getWidth() / 2), (frame.getHeight() / 2), dino, Color.YELLOW, 50, 50);

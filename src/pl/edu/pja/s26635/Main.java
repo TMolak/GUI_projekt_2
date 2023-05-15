@@ -10,6 +10,6 @@ public class Main {
         System.out.println("Hello world!");
 //        SwingUtilities.invokeLater(()->new MenuWindow());
 //        SwingUtilities.invokeLater(()->new GameBoard());
-SwingUtilities.invokeLater(()->new GameWindow());
+        SwingUtilities.invokeLater(() -> new GameWindow());
     }
 }
