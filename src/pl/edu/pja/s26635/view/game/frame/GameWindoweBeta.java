@@ -41,13 +41,12 @@ public class GameWindoweBeta extends JFrame  {
         setSize(800, 800);
 
         dino = new Dino(50, 50, 5, 6);
-        Enemy enemy1 = new Enemy((getWidth() / 2), (getHeight() / 2), dino, Color.BLUE, 50, 50);
+
 //        Enemy enemy2 = new Enemy((frame.getWidth() / 2), (frame.getHeight() / 2), dino, Color.RED, 50, 50);
 //        Enemy enemy3 = new Enemy((frame.getWidth() / 2), (frame.getHeight() / 2), dino, Color.YELLOW, 50, 50);
 
         enemyList = new ArrayList<>();
 
-        enemyList.add(enemy1);
 //        enemyList.add(enemy2);
 //        enemyList.add(enemy3);
 
@@ -57,7 +56,7 @@ public class GameWindoweBeta extends JFrame  {
 
         jPanel.add(jTable);
         jTable.add(dino);
-        jPanel.add(enemy1);
+
 //        jPanel.add(enemy2);
 //        jPanel.add(enemy3);
         setContentPane(jPanel);

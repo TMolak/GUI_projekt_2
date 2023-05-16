@@ -21,7 +21,6 @@ public class Dino extends JComponent{
         this.height = height;
         this.column = column;
         this.row = row;
-        setPreferredSize(new Dimension(width, height));
     }
 
     @Override
