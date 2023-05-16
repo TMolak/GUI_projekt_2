@@ -38,7 +38,12 @@ public class GameWindow extends JFrame implements KeyListener {
         dino = new Dino(40, 40, 5, 6);
 
         Enemy e1 = new Enemy(40, 40, 2, 2, Color.BLUE);
-        Enemy e2 = new Enemy(40, 40, 3, 3, Color.ORANGE);
+        Enemy e2 = new Enemy(40, 40, 5, 7, Color.YELLOW);
+
+        List<Enemy> enemies = new ArrayList<>();
+        enemies.add(e1);
+        enemies.add(e2);
+
 
         DinoRenderer renderer = new DinoRenderer(dino, e1, SizeSelector.getValueX(), SizeSelector.getValueY());
 
@@ -52,8 +57,9 @@ public class GameWindow extends JFrame implements KeyListener {
 
         table.setFocusable(true);
         table.addKeyListener(this);
-        startEnemy(e1);
-        startEnemy(e2);
+//        startEnemy(e1);
+//        startEnemy(e2);
+        startEnemies(enemies);
         table.setRequestFocusEnabled(true);
         table.setBackground(Color.BLACK);
         setContentPane(table);
@@ -151,6 +157,24 @@ public class GameWindow extends JFrame implements KeyListener {
            }
         });
         t1.start();
+    }
+    public void startEnemies(List<Enemy> enemyList){
+        synchronized (enemyList){
+            for (Enemy enemy : enemyList) {
+                Thread t1 = new Thread(()->{
+                    while(true){
+                        randomEnemyMove(enemy);
+                        try{
+                            Thread.sleep(600);
+                        }catch (InterruptedException e){
+                            e.printStackTrace();
+                        }
+                    }
+                });
+                t1.start();
+            }
+        }
+
     }
 
     @Override
