@@ -19,6 +19,12 @@ public class GameWindow extends JFrame implements KeyListener {
 
     private int lifes = 3;
 
+    private JLabel heart1;
+
+    private JLabel heart2;
+
+    private JLabel heart3;
+
     private int height = 800;
 
     private int width = 800;
@@ -30,6 +36,19 @@ public class GameWindow extends JFrame implements KeyListener {
     }
 
     public void generateFrame() {
+        JPanel panel = new JPanel(new BorderLayout());
+        JLabel score = new JLabel("Score: " + 0);
+        heart1 = new JLabel(new ImageIcon("src/graphics/heart.png"));
+        heart2 = new JLabel(new ImageIcon("src/graphics/heart.png"));
+        heart3 = new JLabel(new ImageIcon("src/graphics/heart.png"));
+
+        JPanel scorePanel = new JPanel();
+        scorePanel.add(score);
+        scorePanel.add(heart1);
+        scorePanel.add(heart2);
+        scorePanel.add(heart3);
+        panel.add(scorePanel, BorderLayout.NORTH);
+
         myTableModel = new MyTableModel(50, 50);
         int x = SizeSelector.getValueX();
         int y = SizeSelector.getValueY();
@@ -71,11 +90,15 @@ public class GameWindow extends JFrame implements KeyListener {
         table.addKeyListener(this);
         startEnemies(enemies);
         table.setRequestFocusEnabled(true);
+        panel.add(table, BorderLayout.CENTER);
 
-        setContentPane(table);
+        Container container = getContentPane();
+        container.setLayout(new BorderLayout());
+        container.add(panel, BorderLayout.NORTH);
+        container.add(table, BorderLayout.CENTER);
+        container.setBackground(Color.GREEN);
         setSize(width, height);
-        setBackground(Color.GREEN);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setVisible(true);
     }
 
@@ -90,6 +113,10 @@ public class GameWindow extends JFrame implements KeyListener {
         int row = dino.getRow();
         if (e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_LEFT) {
             if (column > 0 && !illegalCell(row, column - 1)) {
+                if (enemyTouch(row, column - 1)) {
+                    lifes = -1;
+                    System.out.println(lifes);
+                }
                 myTableModel.setValueAt(null, row, column);
                 dino.setColumn(--column);
                 myTableModel.setValueAt(dino, row, column);
@@ -98,6 +125,10 @@ public class GameWindow extends JFrame implements KeyListener {
             System.out.println("LEWO");
         } else if (e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_RIGHT) {
             if (column < table.getColumnCount() - 1 && !illegalCell(row, column + 1)) {
+                if (enemyTouch(row, column + 1)) {
+                    lifes = -1;
+                    System.out.println(lifes);
+                }
                 myTableModel.setValueAt(null, row, column);
                 dino.setColumn(++column);
                 myTableModel.setValueAt(dino, row, column);
@@ -108,6 +139,10 @@ public class GameWindow extends JFrame implements KeyListener {
 
         } else if (e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_UP) {
             if (row > 0 && !illegalCell(row - 1, column)) {
+                if (enemyTouch(row - 1, column)) {
+                    lifes = -1;
+                    System.out.println(lifes);
+                }
                 myTableModel.setValueAt(null, row, column);
                 dino.setRow(--row);
                 myTableModel.setValueAt(dino, row, column);
@@ -118,6 +153,10 @@ public class GameWindow extends JFrame implements KeyListener {
 
         } else if (e.getKeyCode() == KeyEvent.VK_S || e.getKeyCode() == KeyEvent.VK_DOWN) {
             if (row < table.getRowCount() - 1 && !illegalCell(row + 1, column)) {
+                if (enemyTouch(row + 1, column)) {
+                    lifes = -1;
+                    System.out.println(lifes);
+                }
                 myTableModel.setValueAt(null, row, column);
                 dino.setRow(++row);
                 myTableModel.setValueAt(dino, row, column);
@@ -138,6 +177,7 @@ public class GameWindow extends JFrame implements KeyListener {
 
         if (direction == 0) {
             if (row > 0 && !illegalCell(row - 1, column)) {
+
                 myTableModel.setValueAt(null, row, column);
                 enemy.setRow(row - 1);
                 myTableModel.setValueAt(enemy, row - 1, column);
@@ -172,20 +212,6 @@ public class GameWindow extends JFrame implements KeyListener {
         }
     }
 
-    public void startEnemy(Enemy enemy) {
-        Thread t1 = new Thread(() -> {
-            while (true) {
-                randomEnemyMove(enemy);
-                try {
-                    Thread.sleep(800);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        t1.start();
-    }
-
     public void startEnemies(List<Enemy> enemyList) {
         synchronized (enemyList) {
             for (Enemy enemy : enemyList) {
@@ -216,4 +242,23 @@ public class GameWindow extends JFrame implements KeyListener {
 
     }
 
+    public boolean enemyTouch(int row, int column) {
+        Object obj = myTableModel.getValueAt(row, column);
+        if (obj instanceof Enemy) {
+            lifes--;
+            updateLife();
+            return true;
+        }
+        return false;
+    }
+
+    public void updateLife() {
+        if (lifes == 2) {
+            heart3.setVisible(false);
+        }else if (lifes == 1){
+            heart2.setVisible(false);
+        }else{
+            GameOverWindow gameOverWindow = new GameOverWindow();
+        }
+    }
 }
