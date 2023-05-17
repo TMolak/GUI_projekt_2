@@ -85,9 +85,10 @@ public class GameWindow extends JFrame implements KeyListener {
         table.addKeyListener(this);
         startEnemies(enemies);
         table.setRequestFocusEnabled(true);
-        table.setBackground(Color.GREEN);
+
         setContentPane(table);
         setSize(width, height);
+        setBackground(Color.GREEN);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
     }
@@ -208,9 +209,7 @@ public class GameWindow extends JFrame implements KeyListener {
 
     public boolean illegalCell(int row, int column) {
         Component component = table.getCellRenderer(row, column).getTableCellRendererComponent(table, null, true, true, row, column);
-        Color color = component.getBackground();
-
-        return color.equals(Color.RED);
+        return component instanceof Wall;
 
     }
 

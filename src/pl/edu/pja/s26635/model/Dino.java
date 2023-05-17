@@ -27,7 +27,7 @@ public class Dino extends JComponent{
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        ImageIcon imageIcon = new ImageIcon("src/graphics/dino_walk_1.png");
+        ImageIcon imageIcon = new ImageIcon("src/graphics/dino.png");
 
         g.drawImage(imageIcon.getImage(), 0,0, width, height, this);
     }

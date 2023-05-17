@@ -2,6 +2,7 @@ package pl.edu.pja.s26635.view.game.render;
 
 import pl.edu.pja.s26635.model.Dino;
 import pl.edu.pja.s26635.model.Enemy;
+import pl.edu.pja.s26635.model.Grass;
 import pl.edu.pja.s26635.model.Wall;
 
 import javax.swing.*;
@@ -31,7 +32,7 @@ public class DinoRenderer extends DefaultTableCellRenderer {
     public Component getTableCellRendererComponent(JTable table, Object value,
                                                    boolean isSelected, boolean hasFocus, int row, int column) {
         Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-
+        component.setPreferredSize(table.getCellRect(row, column, false).getSize());
 
         if (value instanceof Dino) {
             dino.setRow(row);
@@ -42,13 +43,11 @@ public class DinoRenderer extends DefaultTableCellRenderer {
             return enemy;
         }
         if ((row % 2) == 0 && (column % 2) == 0) {
-            component.setBackground(Color.RED);
-            return new Wall(table.getWidth() / numColumn, table.getHeight() / numRow, row, column);
+            component = new Wall(table.getWidth() / numColumn, table.getHeight() / numRow, row, column);
         } else if (row == 0 || row == numRow - 1 || column == 0 || column == numColumn - 1) {
-            component.setBackground(Color.RED);
-            return new Wall(table.getWidth() / numColumn, table.getHeight() / numRow, row, column);
+            component = new Wall(table.getWidth() / numColumn, table.getHeight() / numRow, row, column);
         } else {
-            component.setBackground(table.getBackground());
+            component = new Grass(table.getWidth() / numColumn, table.getHeight() / numRow, row, column);
         }
 
 

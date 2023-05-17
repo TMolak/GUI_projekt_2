@@ -29,8 +29,9 @@ public class Enemy extends JComponent {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        g.setColor(color);
-        g.fillOval(0, 0, width, height);
+        ImageIcon imageIcon = new ImageIcon("src/graphics/enemy1.png");
+
+        g.drawImage(imageIcon.getImage(), 0,0, width, height, this);
     }
 
 
