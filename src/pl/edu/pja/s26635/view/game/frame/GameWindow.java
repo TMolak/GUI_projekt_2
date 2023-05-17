@@ -2,7 +2,8 @@ package pl.edu.pja.s26635.view.game.frame;
 
 import pl.edu.pja.s26635.model.Dino;
 import pl.edu.pja.s26635.model.Enemy;
-import pl.edu.pja.s26635.model.Wall;
+import pl.edu.pja.s26635.model.TableModel;
+import pl.edu.pja.s26635.model.maze.Wall;
 import pl.edu.pja.s26635.view.game.render.DinoRenderer;
 
 import javax.swing.*;
@@ -23,7 +24,7 @@ public class GameWindow extends JFrame implements KeyListener {
 
     private int width;
     private JTable table;
-    private DefaultTableModel tableModel;
+    private TableModel tableModel;
 
     public GameWindow() {
         generateFrame();
@@ -35,27 +36,12 @@ public class GameWindow extends JFrame implements KeyListener {
         int x = SizeSelector.getValueX();
         int y = SizeSelector.getValueY();
         if (x == 0 || y == 0){
-            tableModel = new DefaultTableModel(50, 50);
+            tableModel = new TableModel(50, 50);
         }else{
-            tableModel = new DefaultTableModel(x, y);
+            tableModel = new TableModel(x, y);
         }
-        table = new JTable(tableModel) {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
-        };
-//    private void scale(){
-//        int width = gamePanel.getWidth();
-//        int height = gamePanel.getHeight();
-//        int numRows = getRowCount();
-//        int numCols = getColumnCount();
-//        int tileSize = Math.min(width / numCols, height / numRows);
-//        for (int i = 0; i < numCols; i++) {
-//            getColumnModel().getColumn(i).setMinWidth(tileSize);
-//        }
-//        setRowHeight(tileSize);
-//    }
+        table = new JTable(tableModel);
+
         int cellSize = Math.min(width/x, height/y);
         table.setRowHeight(cellSize);
         for (int i = 0; i < x; i++) {

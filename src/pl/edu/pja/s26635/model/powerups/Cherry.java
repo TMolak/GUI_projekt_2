@@ -1,10 +1,9 @@
-package pl.edu.pja.s26635.model;
+package pl.edu.pja.s26635.model.powerups;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class Grass extends JComponent{
-
+public class Cherry extends JComponent {
     private int width;
 
     private int height;
@@ -14,7 +13,7 @@ public class Grass extends JComponent{
     private int column;
 
 
-    public Grass(int width, int height, int row, int column) {
+    public Cherry(int width, int height, int row, int column) {
         this.width = width;
         this.height = height;
         this.row = row;
@@ -26,7 +25,7 @@ public class Grass extends JComponent{
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        ImageIcon imageIcon = new ImageIcon("src/graphics/grass.png");
+        ImageIcon imageIcon = new ImageIcon("src/graphics/cherry.png");
 
         int imageWidth = imageIcon.getIconWidth();
         int imageHeight = imageIcon.getIconHeight();

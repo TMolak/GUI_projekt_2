@@ -2,13 +2,12 @@ package pl.edu.pja.s26635.view.game.render;
 
 import pl.edu.pja.s26635.model.Dino;
 import pl.edu.pja.s26635.model.Enemy;
-import pl.edu.pja.s26635.model.Grass;
-import pl.edu.pja.s26635.model.Wall;
+import pl.edu.pja.s26635.model.maze.Grass;
+import pl.edu.pja.s26635.model.maze.Wall;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
-import java.util.List;
 
 public class DinoRenderer extends DefaultTableCellRenderer {
 
