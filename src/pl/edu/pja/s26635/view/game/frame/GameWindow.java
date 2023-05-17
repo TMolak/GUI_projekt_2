@@ -2,12 +2,11 @@ package pl.edu.pja.s26635.view.game.frame;
 
 import pl.edu.pja.s26635.model.Dino;
 import pl.edu.pja.s26635.model.Enemy;
-import pl.edu.pja.s26635.model.TableModel;
+import pl.edu.pja.s26635.model.MyTableModel;
 import pl.edu.pja.s26635.model.maze.Wall;
 import pl.edu.pja.s26635.view.game.render.DinoRenderer;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -20,49 +19,50 @@ public class GameWindow extends JFrame implements KeyListener {
 
     private int lifes = 3;
 
-    private int height;
+    private int height = 800;
 
-    private int width;
+    private int width = 800;
     private JTable table;
-    private TableModel tableModel;
+    private MyTableModel myTableModel;
 
     public GameWindow() {
         generateFrame();
     }
 
     public void generateFrame() {
-        height = 800;
-        width = 800;
+        myTableModel = new MyTableModel(50, 50);
         int x = SizeSelector.getValueX();
         int y = SizeSelector.getValueY();
-        if (x == 0 || y == 0){
-            tableModel = new TableModel(50, 50);
-        }else{
-            tableModel = new TableModel(x, y);
+        if (x != 0 || y != 0) {
+            myTableModel = new MyTableModel(x, y);
         }
-        table = new JTable(tableModel);
+        table = new JTable(myTableModel);
 
-        int cellSize = Math.min(width/x, height/y);
+        int cellSize = Math.min(width / x, height / y);
         table.setRowHeight(cellSize);
         for (int i = 0; i < x; i++) {
             table.getColumnModel().getColumn(i).setPreferredWidth(cellSize);
         }
+
         dino = new Dino(cellSize, cellSize, 5, 6);
 
-        Enemy e1 = new Enemy(cellSize, cellSize, 2, 2, Color.BLUE);
-        Enemy e2 = new Enemy(cellSize, cellSize, 5, 7, Color.YELLOW);
+        Enemy e1 = new Enemy(cellSize, cellSize, 2, 2);
+        Enemy e2 = new Enemy(cellSize, cellSize, 5, 7);
+        Enemy e3 = new Enemy(cellSize, cellSize, 2, 2);
+        Enemy e4 = new Enemy(cellSize, cellSize, 5, 7);
 
         List<Enemy> enemies = new ArrayList<>();
         enemies.add(e1);
         enemies.add(e2);
+        enemies.add(e3);
+        enemies.add(e4);
 
 
-        DinoRenderer renderer = new DinoRenderer(dino, e1, x, y);
+        DinoRenderer renderer = new DinoRenderer(dino, enemies, x, y);
 
-        tableModel.setValueAt(dino, dino.getRow(), dino.getColumn());
-
-        tableModel.setValueAt(e1, e1.getRow(), e1.getColumn());
-        tableModel.setValueAt(e2, e2.getRow(), e2.getColumn());
+        myTableModel.setValueAt(dino, dino.getRow(), dino.getColumn());
+        myTableModel.setValueAt(e1, e1.getRow(), e1.getColumn());
+        myTableModel.setValueAt(e2, e2.getRow(), e2.getColumn());
 
 
         table.setDefaultRenderer(Object.class, renderer);
@@ -90,38 +90,46 @@ public class GameWindow extends JFrame implements KeyListener {
         int row = dino.getRow();
         if (e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_LEFT) {
             if (column > 0 && !illegalCell(row, column - 1)) {
-                tableModel.setValueAt(null, row, column);
+                myTableModel.setValueAt(null, row, column);
                 dino.setColumn(--column);
-                tableModel.setValueAt(dino, row, column);
+                myTableModel.setValueAt(dino, row, column);
+                myTableModel.fireTableCellUpdated(row, column);
             }
             System.out.println("LEWO");
         } else if (e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_RIGHT) {
             if (column < table.getColumnCount() - 1 && !illegalCell(row, column + 1)) {
-                tableModel.setValueAt(null, row, column);
+                myTableModel.setValueAt(null, row, column);
                 dino.setColumn(++column);
-                tableModel.setValueAt(dino, row, column);
+                myTableModel.setValueAt(dino, row, column);
+                myTableModel.fireTableCellUpdated(row, column);
+
             }
             System.out.println("PRAWO");
 
         } else if (e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_UP) {
             if (row > 0 && !illegalCell(row - 1, column)) {
-                tableModel.setValueAt(null, row, column);
+                myTableModel.setValueAt(null, row, column);
                 dino.setRow(--row);
-                tableModel.setValueAt(dino, row, column);
+                myTableModel.setValueAt(dino, row, column);
+                myTableModel.fireTableCellUpdated(row, column);
+
             }
             System.out.println("GORA");
 
         } else if (e.getKeyCode() == KeyEvent.VK_S || e.getKeyCode() == KeyEvent.VK_DOWN) {
             if (row < table.getRowCount() - 1 && !illegalCell(row + 1, column)) {
-                tableModel.setValueAt(null, row, column);
+                myTableModel.setValueAt(null, row, column);
                 dino.setRow(++row);
-                tableModel.setValueAt(dino, row, column);
+                myTableModel.setValueAt(dino, row, column);
+                myTableModel.fireTableCellUpdated(row, column);
+
             }
             System.out.println("DOL");
 
         }
 
     }
+
     public void randomEnemyMove(Enemy enemy) {
         Random random = new Random();
         int row = enemy.getRow();
@@ -130,54 +138,63 @@ public class GameWindow extends JFrame implements KeyListener {
 
         if (direction == 0) {
             if (row > 0 && !illegalCell(row - 1, column)) {
-                tableModel.setValueAt(null, row, column);
+                myTableModel.setValueAt(null, row, column);
                 enemy.setRow(row - 1);
-                tableModel.setValueAt(enemy, row - 1, column);
+                myTableModel.setValueAt(enemy, row - 1, column);
+                myTableModel.fireTableCellUpdated(row, column);
+
             }
-        }else if(direction ==1){
+        } else if (direction == 1) {
             if (column < table.getColumnCount() - 1 && !illegalCell(row, column + 1)) {
-                tableModel.setValueAt(null, row, column);
+                myTableModel.setValueAt(null, row, column);
                 enemy.setColumn(++column);
-                tableModel.setValueAt(enemy, row, column);
+                myTableModel.setValueAt(enemy, row, column);
+                myTableModel.fireTableCellUpdated(row, column);
+
             }
-        }else if (direction == 2){
+        } else if (direction == 2) {
             if (row > 0 && !illegalCell(row - 1, column)) {
-                tableModel.setValueAt(null, row, column);
+                myTableModel.setValueAt(null, row, column);
                 enemy.setRow(--row);
-                tableModel.setValueAt(enemy, row, column);
+                myTableModel.setValueAt(enemy, row, column);
+                myTableModel.fireTableCellUpdated(row, column);
+
             }
 
-        }else if (direction == 3){
+        } else if (direction == 3) {
             if (row < table.getRowCount() - 1 && !illegalCell(row + 1, column)) {
-                tableModel.setValueAt(null, row, column);
+                myTableModel.setValueAt(null, row, column);
                 enemy.setRow(++row);
-                tableModel.setValueAt(enemy, row, column);
+                myTableModel.setValueAt(enemy, row, column);
+                myTableModel.fireTableCellUpdated(row, column);
+
             }
         }
     }
 
-    public void startEnemy(Enemy enemy){
-        Thread t1 = new Thread(()->{
-           while(true){
-               randomEnemyMove(enemy);
-               try{
-                   Thread.sleep(800);
-               }catch (InterruptedException e){
-                   e.printStackTrace();
-               }
-           }
+    public void startEnemy(Enemy enemy) {
+        Thread t1 = new Thread(() -> {
+            while (true) {
+                randomEnemyMove(enemy);
+                try {
+                    Thread.sleep(800);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
         });
         t1.start();
     }
-    public void startEnemies(List<Enemy> enemyList){
-        synchronized (enemyList){
+
+    public void startEnemies(List<Enemy> enemyList) {
+        synchronized (enemyList) {
             for (Enemy enemy : enemyList) {
-                Thread t1 = new Thread(()->{
-                    while(true){
+                Thread t1 = new Thread(() -> {
+                    while (true) {
                         randomEnemyMove(enemy);
-                        try{
+                        try {
                             Thread.sleep(600);
-                        }catch (InterruptedException e){
+                        } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
                     }

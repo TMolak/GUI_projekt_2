@@ -17,7 +17,9 @@ public class MenuWindow extends JFrame {
 
         JButton newGameButton = new JButton("New Game");
         JButton scoresButton = new JButton("High Scores");
+        JButton instructionButton = new JButton("Instrukcja");
         JButton exitButton = new JButton("Exit");
+
 
         newGameButton.addActionListener(new ActionListener() {
             @Override
@@ -31,6 +33,12 @@ public class MenuWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 HighScoresWindow highScoresWindow = new HighScoresWindow();
+            }
+        });
+        instructionButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
             }
         });
 

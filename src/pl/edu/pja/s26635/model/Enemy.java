@@ -14,15 +14,14 @@ public class Enemy extends JComponent {
 
     private int row;
 
-    private Color color;
 
 
-    public Enemy(int width, int height, int column, int row, Color color) {
+    public Enemy(int width, int height, int column, int row) {
         this.width = width;
         this.height = height;
         this.column = column;
         this.row = row;
-        this.color = color;
+
     }
 
     @Override
@@ -70,11 +69,5 @@ public class Enemy extends JComponent {
         this.row = row;
     }
 
-    public Color getColor() {
-        return color;
-    }
 
-    public void setColor(Color color) {
-        this.color = color;
-    }
 }
