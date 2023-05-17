@@ -2,6 +2,7 @@ package pl.edu.pja.s26635.view.game.frame;
 
 import pl.edu.pja.s26635.model.Dino;
 import pl.edu.pja.s26635.model.Enemy;
+import pl.edu.pja.s26635.model.Wall;
 import pl.edu.pja.s26635.view.game.render.DinoRenderer;
 
 import javax.swing.*;
@@ -14,38 +15,63 @@ import java.util.List;
 import java.util.Random;
 
 public class GameWindow extends JFrame implements KeyListener {
-    Dino dino;
-    JTable table;
-    DefaultTableModel tableModel;
+    private Dino dino;
+
+    private int lifes = 3;
+
+    private int height;
+
+    private int width;
+    private JTable table;
+    private DefaultTableModel tableModel;
 
     public GameWindow() {
         generateFrame();
     }
 
     public void generateFrame() {
-        tableModel = new DefaultTableModel(SizeSelector.getValueX(), SizeSelector.getValueY());
+        height = 800;
+        width = 800;
+        int x = SizeSelector.getValueX();
+        int y = SizeSelector.getValueY();
+        if (x == 0 || y == 0){
+            tableModel = new DefaultTableModel(50, 50);
+        }else{
+            tableModel = new DefaultTableModel(x, y);
+        }
         table = new JTable(tableModel) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
-
-        table.setRowHeight(55);
-        for (int i = 0; i < SizeSelector.getValueX(); i++) {
-            table.getColumnModel().getColumn(i).setPreferredWidth(55);
+//    private void scale(){
+//        int width = gamePanel.getWidth();
+//        int height = gamePanel.getHeight();
+//        int numRows = getRowCount();
+//        int numCols = getColumnCount();
+//        int tileSize = Math.min(width / numCols, height / numRows);
+//        for (int i = 0; i < numCols; i++) {
+//            getColumnModel().getColumn(i).setMinWidth(tileSize);
+//        }
+//        setRowHeight(tileSize);
+//    }
+        int cellSize = Math.min(width/x, height/y);
+        table.setRowHeight(cellSize);
+        for (int i = 0; i < x; i++) {
+            table.getColumnModel().getColumn(i).setPreferredWidth(cellSize);
         }
-        dino = new Dino(40, 40, 5, 6);
+        dino = new Dino(cellSize, cellSize, 5, 6);
 
-        Enemy e1 = new Enemy(40, 40, 2, 2, Color.BLUE);
-        Enemy e2 = new Enemy(40, 40, 5, 7, Color.YELLOW);
+        Enemy e1 = new Enemy(cellSize, cellSize, 2, 2, Color.BLUE);
+        Enemy e2 = new Enemy(cellSize, cellSize, 5, 7, Color.YELLOW);
 
         List<Enemy> enemies = new ArrayList<>();
         enemies.add(e1);
         enemies.add(e2);
 
 
-        DinoRenderer renderer = new DinoRenderer(dino, e1, SizeSelector.getValueX(), SizeSelector.getValueY());
+        DinoRenderer renderer = new DinoRenderer(dino, e1, x, y);
 
         tableModel.setValueAt(dino, dino.getRow(), dino.getColumn());
 
@@ -57,13 +83,11 @@ public class GameWindow extends JFrame implements KeyListener {
 
         table.setFocusable(true);
         table.addKeyListener(this);
-//        startEnemy(e1);
-//        startEnemy(e2);
         startEnemies(enemies);
         table.setRequestFocusEnabled(true);
-        table.setBackground(Color.BLACK);
+        table.setBackground(Color.GREEN);
         setContentPane(table);
-        setSize(800, 800);
+        setSize(width, height);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
     }
@@ -185,7 +209,9 @@ public class GameWindow extends JFrame implements KeyListener {
     public boolean illegalCell(int row, int column) {
         Component component = table.getCellRenderer(row, column).getTableCellRendererComponent(table, null, true, true, row, column);
         Color color = component.getBackground();
+
         return color.equals(Color.RED);
+
     }
 
 }
