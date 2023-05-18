@@ -27,12 +27,12 @@ public class MyTableModel extends AbstractTableModel {
     }
 
     @Override
-    public Object getValueAt(int rowIndex, int columnIndex) {
+    public synchronized Object getValueAt(int rowIndex, int columnIndex) {
         return obj[rowIndex][columnIndex];
     }
 
     @Override
-    public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+    public synchronized void setValueAt(Object aValue, int rowIndex, int columnIndex) {
         obj[rowIndex][columnIndex] = aValue;
         fireTableCellUpdated(row, column);
     }

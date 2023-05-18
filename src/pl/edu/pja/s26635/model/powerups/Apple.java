@@ -24,13 +24,7 @@ public class Apple extends JComponent {
     @Override
     public void paintComponent(Graphics g) {
 
-        int imageWidth = imageIcon.getIconWidth();
-        int imageHeight = imageIcon.getIconHeight();
-
-        int x = (width - imageWidth) / 2;
-        int y = (height - imageHeight) / 2;
-
-        g.drawImage(imageIcon.getImage(), x, y, imageWidth, imageHeight, this);
+        g.drawImage(imageIcon.getImage(), width, height, this);
     }
 
     @Override

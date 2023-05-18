@@ -56,9 +56,9 @@ public class DinoRenderer extends DefaultTableCellRenderer{
             return enemy;
 
         }else if (visitedCells[row][column]) {
-            return new Apple(table.getWidth() / numColumn, table.getHeight() / numRow, new ImageIcon("src/graphics/apple.png"));
+            return new Apple(dino.getWidth(), dino.getHeight(), new ImageIcon("src/graphics/apple.png"));
         } else if (random.nextInt(10) <= 8){
-            return new Wall(table.getWidth() / numColumn, table.getHeight() / numRow);
+            return new Wall(dino.getWidth(), dino.getHeight());
         }
         return component;
     }
