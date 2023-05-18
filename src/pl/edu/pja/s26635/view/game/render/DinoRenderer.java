@@ -25,6 +25,8 @@ public class DinoRenderer extends DefaultTableCellRenderer{
 
     private boolean[][] visitedCells;
 
+    private Random random = new Random();
+
     public DinoRenderer(Dino dino, List<Enemy> enemies, int numRow, int numColumn) {
         this.dino = dino;
         this.enemies = enemies;
@@ -43,7 +45,6 @@ public class DinoRenderer extends DefaultTableCellRenderer{
                                                    boolean isSelected, boolean hasFocus, int row, int column) {
         Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
         component.setPreferredSize(table.getCellRect(row, column, false).getSize());
-
         if (value instanceof Dino) {
             dino.setRow(row);
             dino.setColumn(column);
@@ -56,8 +57,10 @@ public class DinoRenderer extends DefaultTableCellRenderer{
 
         }else if (visitedCells[row][column]) {
             return new Apple(table.getWidth() / numColumn, table.getHeight() / numRow, false);
-        } else {
+        } else if (random.nextInt(10) <= 8){
             return new Wall(table.getWidth() / numColumn, table.getHeight() / numRow);
+        }else{
+            return new Apple(table.getWidth() / numColumn, table.getHeight() / numRow, false);
         }
 
     }
