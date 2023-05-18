@@ -3,8 +3,11 @@ package pl.edu.pja.s26635.view.game.frame;
 import pl.edu.pja.s26635.model.Dino;
 import pl.edu.pja.s26635.model.Enemy;
 import pl.edu.pja.s26635.model.MyTableModel;
+import pl.edu.pja.s26635.model.maze.Grass;
 import pl.edu.pja.s26635.model.maze.Wall;
+import pl.edu.pja.s26635.model.powerups.Apple;
 import pl.edu.pja.s26635.view.game.render.DinoRenderer;
+import pl.edu.pja.s26635.view.scores.HighScoreModel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,8 +19,14 @@ import java.util.Random;
 
 public class GameWindow extends JFrame implements KeyListener {
     private Dino dino;
+    private HighScoreModel highScoreModel;
+    int x = SizeSelector.getValueX();
+
+    int y = SizeSelector.getValueY();
 
     private int lifes = 3;
+
+    private int points = 0;
 
     private JLabel heart1;
 
@@ -29,15 +38,19 @@ public class GameWindow extends JFrame implements KeyListener {
 
     private int width = 800;
     private JTable table;
+
+    private JLabel score;
     private MyTableModel myTableModel;
 
     public GameWindow() {
         generateFrame();
+        highScoreModel = new HighScoreModel();
     }
 
     public void generateFrame() {
+
         JPanel panel = new JPanel(new BorderLayout());
-        JLabel score = new JLabel("Score: " + 0);
+        score = new JLabel();
         heart1 = new JLabel(new ImageIcon("src/graphics/heart.png"));
         heart2 = new JLabel(new ImageIcon("src/graphics/heart.png"));
         heart3 = new JLabel(new ImageIcon("src/graphics/heart.png"));
@@ -50,8 +63,7 @@ public class GameWindow extends JFrame implements KeyListener {
         panel.add(scorePanel, BorderLayout.NORTH);
 
         myTableModel = new MyTableModel(50, 50);
-        int x = SizeSelector.getValueX();
-        int y = SizeSelector.getValueY();
+
         if (x != 0 || y != 0) {
             myTableModel = new MyTableModel(x, y);
         }
@@ -91,12 +103,12 @@ public class GameWindow extends JFrame implements KeyListener {
         startEnemies(enemies);
         table.setRequestFocusEnabled(true);
         panel.add(table, BorderLayout.CENTER);
-
+        scorePanel.setBackground(Color.GREEN);
         Container container = getContentPane();
         container.setLayout(new BorderLayout());
         container.add(panel, BorderLayout.NORTH);
         container.add(table, BorderLayout.CENTER);
-        container.setBackground(Color.GREEN);
+
         setSize(width, height);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setVisible(true);
@@ -113,60 +125,51 @@ public class GameWindow extends JFrame implements KeyListener {
         int row = dino.getRow();
         if (e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_LEFT) {
             if (column > 0 && !illegalCell(row, column - 1)) {
-                if (enemyTouch(row, column - 1)) {
-                    lifes = -1;
-                    System.out.println(lifes);
-                }
+                enemyTouch(row, column - 1);
                 myTableModel.setValueAt(null, row, column);
-                dino.setColumn(--column);
-                myTableModel.setValueAt(dino, row, column);
+                dino.setColumn(column - 1);
+                myTableModel.setValueAt(dino, row, column - 1);
                 myTableModel.fireTableCellUpdated(row, column);
+                myTableModel.fireTableCellUpdated(row, column - 1);
+                pointGain(row, column - 1);
             }
             System.out.println("LEWO");
         } else if (e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_RIGHT) {
             if (column < table.getColumnCount() - 1 && !illegalCell(row, column + 1)) {
-                if (enemyTouch(row, column + 1)) {
-                    lifes = -1;
-                    System.out.println(lifes);
-                }
+                enemyTouch(row, column + 1);
                 myTableModel.setValueAt(null, row, column);
-                dino.setColumn(++column);
-                myTableModel.setValueAt(dino, row, column);
+                dino.setColumn(column + 1);
+                myTableModel.setValueAt(dino, row, column + 1);
                 myTableModel.fireTableCellUpdated(row, column);
-
+                myTableModel.fireTableCellUpdated(row, column + 1);
+                pointGain(row, column + 1);
             }
             System.out.println("PRAWO");
-
         } else if (e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_UP) {
             if (row > 0 && !illegalCell(row - 1, column)) {
-                if (enemyTouch(row - 1, column)) {
-                    lifes = -1;
-                    System.out.println(lifes);
-                }
+                enemyTouch(row - 1, column);
                 myTableModel.setValueAt(null, row, column);
-                dino.setRow(--row);
-                myTableModel.setValueAt(dino, row, column);
+                dino.setRow(row - 1);
+                myTableModel.setValueAt(dino, row - 1, column);
                 myTableModel.fireTableCellUpdated(row, column);
-
+                myTableModel.fireTableCellUpdated(row - 1, column);
+                pointGain(row - 1, column);
             }
             System.out.println("GORA");
-
         } else if (e.getKeyCode() == KeyEvent.VK_S || e.getKeyCode() == KeyEvent.VK_DOWN) {
             if (row < table.getRowCount() - 1 && !illegalCell(row + 1, column)) {
-                if (enemyTouch(row + 1, column)) {
-                    lifes = -1;
-                    System.out.println(lifes);
-                }
+                enemyTouch(row + 1, column);
                 myTableModel.setValueAt(null, row, column);
-                dino.setRow(++row);
-                myTableModel.setValueAt(dino, row, column);
+                dino.setRow(row + 1);
+                myTableModel.setValueAt(dino, row + 1, column);
                 myTableModel.fireTableCellUpdated(row, column);
-
+                myTableModel.fireTableCellUpdated(row + 1, column);
+                pointGain(row + 1, column);
             }
             System.out.println("DOL");
-
         }
-
+        score.setText("Score: " + points);
+        table.requestFocus();
     }
 
     public void randomEnemyMove(Enemy enemy) {
@@ -177,7 +180,6 @@ public class GameWindow extends JFrame implements KeyListener {
 
         if (direction == 0) {
             if (row > 0 && !illegalCell(row - 1, column)) {
-
                 myTableModel.setValueAt(null, row, column);
                 enemy.setRow(row - 1);
                 myTableModel.setValueAt(enemy, row - 1, column);
@@ -252,13 +254,32 @@ public class GameWindow extends JFrame implements KeyListener {
         return false;
     }
 
+    public boolean pointGain(int row, int column) {
+        Object obj = myTableModel.getValueAt(row, column);
+        if (obj instanceof Apple) {
+            points += 10;
+            ((Apple) myTableModel.getValueAt(row, column)).setCollected(true);
+            myTableModel.fireTableCellUpdated(row, column);
+            System.out.println("PUNKT: " + points);
+            return true;
+        }
+        return false;
+    }
+
     public void updateLife() {
         if (lifes == 2) {
             heart3.setVisible(false);
-        }else if (lifes == 1){
+        } else if (lifes == 1) {
             heart2.setVisible(false);
-        }else{
-            GameOverWindow gameOverWindow = new GameOverWindow();
+        } else {
+            String playerName = JOptionPane.showInputDialog(null, "Podaj swoje imię: ");
+
+            String message = "Gacz: " + playerName + " zdobyl/a " + points + " punktow";
+
+            highScoreModel.getDataAfterGame(playerName, points);
+
+            JOptionPane.showMessageDialog(null, message, "Koniec gry", JOptionPane.INFORMATION_MESSAGE);
         }
     }
+
 }

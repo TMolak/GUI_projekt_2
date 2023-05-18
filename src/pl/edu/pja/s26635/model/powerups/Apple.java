@@ -3,9 +3,12 @@ package pl.edu.pja.s26635.model.powerups;
 import javax.swing.*;
 import java.awt.*;
 
-public class Point extends JComponent{
+public class Apple extends JComponent{
     private int width;
 
+    private boolean collected;
+
+    private ImageIcon imageIcon;
     private int height;
 
     private int row;
@@ -13,19 +16,20 @@ public class Point extends JComponent{
     private int column;
 
 
-    public Point(int width, int height, int row, int column) {
+    public Apple(int width, int height, boolean collected) {
         this.width = width;
         this.height = height;
-        this.row = row;
-        this.column = column;
-        setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+this.collected = collected;
     }
 
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-
-        ImageIcon imageIcon = new ImageIcon("src/graphics/point.png");
+    if (!collected){
+        imageIcon = new ImageIcon("src/graphics/point.png");
+    }else{
+        imageIcon = new ImageIcon("src/graphics/grass2.png");
+    }
 
         int imageWidth = imageIcon.getIconWidth();
         int imageHeight = imageIcon.getIconHeight();
@@ -34,5 +38,9 @@ public class Point extends JComponent{
         int y = (height - imageHeight) / 2;
 
         g.drawImage(imageIcon.getImage(), x, y, imageWidth, imageHeight, this);
+    }
+
+    public void setCollected(boolean collected) {
+        this.collected = collected;
     }
 }

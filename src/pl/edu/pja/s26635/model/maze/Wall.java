@@ -14,11 +14,10 @@ public class Wall extends JComponent {
     private int column;
 
 
-    public Wall(int width, int height, int row, int column) {
+    public Wall(int width, int height) {
         this.width = width;
         this.height = height;
-        this.row = row;
-        this.column = column;
+
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
     }
 
