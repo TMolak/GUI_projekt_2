@@ -36,8 +36,8 @@ public class DinoRenderer extends DefaultTableCellRenderer{
         dino.addPropertyChangeListener(event -> firePropertyChange("tableCellRenderer", null, null));
         for (Enemy enemy : enemies) {
             enemy.addPropertyChangeListener(event -> firePropertyChange("tableCellRenderer", null, null));
-            mazeGeneration();
         }
+        mazeGeneration();
     }
 
     @Override
@@ -56,13 +56,11 @@ public class DinoRenderer extends DefaultTableCellRenderer{
             return enemy;
 
         }else if (visitedCells[row][column]) {
-            return new Apple(table.getWidth() / numColumn, table.getHeight() / numRow, false);
+            return new Apple(table.getWidth() / numColumn, table.getHeight() / numRow, new ImageIcon("src/graphics/apple.png"));
         } else if (random.nextInt(10) <= 8){
             return new Wall(table.getWidth() / numColumn, table.getHeight() / numRow);
-        }else{
-            return new Apple(table.getWidth() / numColumn, table.getHeight() / numRow, false);
         }
-
+        return component;
     }
 
     public void mazeGeneration(){

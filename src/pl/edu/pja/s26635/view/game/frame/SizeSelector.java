@@ -44,8 +44,9 @@ public class SizeSelector extends JFrame {
         startGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-//                GameWindoweBeta gameWindoweBeta = new GameWindoweBeta();
                 GameWindow gameWindow = new GameWindow();
+                dispose();
+
             }
         });
 

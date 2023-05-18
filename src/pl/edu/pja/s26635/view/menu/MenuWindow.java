@@ -26,6 +26,7 @@ public class MenuWindow extends JFrame {
             public void actionPerformed(ActionEvent e) {
 //                GameWindow gameWindow = new GameWindow();
                 SizeSelector sizeSelector = new SizeSelector();
+                dispose();
             }
         });
 
@@ -38,7 +39,7 @@ public class MenuWindow extends JFrame {
         instructionButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                dispose();
             }
         });
 
