@@ -6,7 +6,7 @@ import java.awt.*;
 public class Apple extends JComponent {
     private int width;
 
-    private ImageIcon imageIcon;
+
     private int height;
 
     private int row;
@@ -14,17 +14,19 @@ public class Apple extends JComponent {
     private int column;
 
 
-    public Apple(int width, int height, ImageIcon imageIcon) {
+    public Apple(int width, int height, int row, int column) {
         this.width = width;
         this.height = height;
-        this.imageIcon = imageIcon;
-
+        this.row = row;
+        this.column = column;
     }
 
     @Override
     public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        ImageIcon imageIcon = new ImageIcon("src/graphics/apple.png");
 
-        g.drawImage(imageIcon.getImage(), width, height, this);
+        g.drawImage(imageIcon.getImage(), 0, 0, width, height, this);
     }
 
     @Override
@@ -36,13 +38,6 @@ public class Apple extends JComponent {
         this.width = width;
     }
 
-    public ImageIcon getImageIcon() {
-        return imageIcon;
-    }
-
-    public void setImageIcon(ImageIcon imageIcon) {
-        this.imageIcon = imageIcon;
-    }
 
     @Override
     public int getHeight() {

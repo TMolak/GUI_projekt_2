@@ -2,8 +2,6 @@ package pl.edu.pja.s26635.model;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Random;
-
 public class Enemy extends JComponent {
 
     private int width;

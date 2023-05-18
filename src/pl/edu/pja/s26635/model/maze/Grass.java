@@ -28,12 +28,41 @@ public class Grass extends JComponent{
 
         ImageIcon imageIcon = new ImageIcon("src/graphics/grass2.png");
 
-        int imageWidth = imageIcon.getIconWidth();
-        int imageHeight = imageIcon.getIconHeight();
 
-        int x = (width - imageWidth) / 2;
-        int y = (height - imageHeight) / 2;
+        g.drawImage(imageIcon.getImage(), 0, 0, width, height, this);
+    }
 
-        g.drawImage(imageIcon.getImage(), x, y, imageWidth, imageHeight, this);
+    @Override
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    @Override
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public int getRow() {
+        return row;
+    }
+
+    public void setRow(int row) {
+        this.row = row;
+    }
+
+    public int getColumn() {
+        return column;
+    }
+
+    public void setColumn(int column) {
+        this.column = column;
     }
 }

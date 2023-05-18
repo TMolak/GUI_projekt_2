@@ -33,6 +33,6 @@ public class Melon extends JComponent {
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
 
-        g.drawImage(imageIcon.getImage(), x, y, imageWidth, imageHeight, this);
+        g.drawImage(imageIcon.getImage(), x, y, imageWidth, width, this);
     }
 }

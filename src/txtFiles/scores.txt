@@ -1,7 +1,3 @@
-tomek 0
-ddd 0
-rrr 0
-Tomek ww 0
-ssss 0
-dupa 0
-dddsafda 240
+
+w 6
+gracz 84

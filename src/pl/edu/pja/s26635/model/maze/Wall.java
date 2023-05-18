@@ -27,12 +27,6 @@ public class Wall extends JComponent {
 
         ImageIcon imageIcon = new ImageIcon("src/graphics/wall.png");
 
-        int imageWidth = imageIcon.getIconWidth();
-        int imageHeight = imageIcon.getIconHeight();
-
-        int x = (width - imageWidth) / 2;
-        int y = (height - imageHeight) / 2;
-
-        g.drawImage(imageIcon.getImage(), x, y, imageWidth, imageHeight, this);
+        g.drawImage(imageIcon.getImage(), 0, 0, width, height, this);
     }
 }
